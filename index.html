@@ -10,6 +10,10 @@
         
 </head>
 <body id="mainBody">
+    <!-- SPLASH SCREEN -->
+<div id="splashScreen">
+    <img id="splashImg" src="./Asset/splash-p.jpeg" alt="Splash">
+</div>
 
     <div class="glass-panel" id="mainPanel">
         
@@ -77,10 +81,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div id="footerText" class="mt-auto text-center pt-4 pb-4 shrink-0 landscape:hidden">
-                <p class="text-[10px] text-emerald-800/50 bg-emerald-50 inline-block px-3 py-1 rounded-full border border-emerald-100/50">Versi 4.2 - Final Fix</p>
             </div>
         </div>
 
@@ -669,5 +669,22 @@
         function handleSourceClick(el){document.querySelectorAll('.puzzle-source').forEach(s=>s.classList.remove('selected'));el.classList.add('selected');selectedDragItem=el;const text=el.querySelector('.arabic-font').innerText;speak(text);}
         function handleTargetClick(targetEl){if(targetEl.classList.contains('matched-target'))return;if(!selectedDragItem){targetEl.classList.add('animate-bounce');setTimeout(()=>targetEl.classList.remove('animate-bounce'),500);return;}const sourceId=parseInt(selectedDragItem.dataset.id);const targetId=parseInt(targetEl.dataset.id);if(sourceId===targetId){const content=selectedDragItem.innerHTML;targetEl.classList.add('active-target','matched-target');targetEl.innerHTML=`<span class="text-[10px] font-bold text-emerald-600 mb-1 text-center leading-tight">Benar!</span><div class="w-full h-10 bg-emerald-50 rounded flex items-center justify-center border border-emerald-200">${content}</div>`;selectedDragItem.classList.add('hidden-source');selectedDragItem.classList.remove('selected');selectedDragItem=null;matchedDragCount++;playSound('success');if(matchedDragCount===4){setTimeout(()=>{document.getElementById('dragDropCompletionModal').classList.remove('hidden');},500);}}else{targetEl.classList.add('bg-red-50','border-red-200');const container=targetEl.querySelector('div');container.innerHTML="<span class='text-red-500 font-bold'>X</span>";playSound('wrong');setTimeout(()=>{targetEl.classList.remove('bg-red-50','border-red-200');container.innerHTML="<span class='text-gray-300 text-xs'>?</span>";},500);}}
     </script>
+    <script>
+    window.addEventListener("load", () => {
+        const splash = document.getElementById("splashScreen");
+
+        setTimeout(() => {
+            splash.classList.add("hide");
+        }, 2000);
+
+        // benar-benar dihapus setelah animasi selesai
+        splash.addEventListener("animationend", () => {
+            if (splash.classList.contains("hide")) {
+                splash.remove();
+            }
+        });
+    });
+</script>
+
 </body>
 </html>

@@ -250,3 +250,72 @@
 
         .toggle-checkbox:checked { right: 0; border-color: #10b981; }
         .toggle-checkbox:checked + .toggle-label { background-color: #10b981; }
+
+/* SPLASH SCREEN */
+#splashScreen {
+    position: fixed;
+    inset: 0;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    animation: splashIn 0.8s ease forwards;
+}
+
+#splashScreen.hide {
+    animation: splashOut 0.8s ease forwards;
+    pointer-events: none;
+}
+
+#splashImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ANIMATIONS */
+@keyframes splashIn {
+    from {
+        opacity: 0;
+        transform: scale(1.05);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes splashOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+}
+
+/* ORIENTATION IMAGE */
+@media (orientation: landscape) {
+    #splashImg {
+        content: url("./Asset/splash-l.jpeg");
+    }
+}
+
+@media (orientation: portrait) {
+    #splashImg {
+        content: url("./Asset/splash-p.jpeg");
+    }
+}
+/* HILANGKAN SCROLLBAR DASHBOARD */
+#homePage {
+    overflow-y: auto;
+    scrollbar-width: none;          /* Firefox */
+    -ms-overflow-style: none;       /* IE & Edge lama */
+}
+
+#homePage::-webkit-scrollbar {
+    display: none;                  /* Chrome, Edge, Safari */
+}
